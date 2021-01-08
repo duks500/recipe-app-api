@@ -74,12 +74,19 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# Configure the database to work with our database
+# If there is a need to change the variable, all we need to do is to change the variable at the docker-compose file
 DATABASES = {
     'default': {
+        # The database engine that we are using
         'ENGINE': 'django.db.backends.postgresql',
+        # The HOST = db
         'HOST': os.environ.get('DB_HOST'),
+        # The NAME = app
         'NAME': os.environ.get('DB_NAME'),
+        # The USER = postgres
         'USER': os.environ.get('DB_USER'),
+        # The PASSWORD = suppersecretpassword
         'PASSWORD': os.environ.get('Db_PASS')
     }
 }

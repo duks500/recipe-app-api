@@ -11,16 +11,26 @@ services:
     command: >
       sh -c "python3 manage.py runserver 0.0.0.0:8000"
     environment:
+      # The name of service (database)
       - DB_HOST=db
+      # Need to be equal the POSTGRES_DB
       - DB_NAME=app
+      # The user name
       - DB_USER=postgres
+      # The password
       - Db_PASS=suppersecretpassword
     depends_on:
       - db
 
+  # The database
   db:
+    # PostgresSQL
     image: postgres:10-alpine
     environment:
+      # The app settings
       - POSTGRES_DB=app
+      # The user settings
       - POSTGRES_USER=postgres
+      # The password settings
+      # Make sure not to use in production
       - POSTGRES_PASSWORD=suppersecretpassword
