@@ -89,7 +89,7 @@ class Recipe(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     link = models.CharField(max_length=255, blank=True)
     # ManyToManyField = we could have many tags for example for one recipe
-    ingredient = models.ManyToManyField('Ingredient')
+    ingredients = models.ManyToManyField('Ingredient')
     tags = models.ManyToManyField('Tag')
 
     def __str__(self):
