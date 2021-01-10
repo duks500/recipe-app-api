@@ -69,7 +69,7 @@ class PrivateTagsApiTests(TestCase):
 
         # Check if the tags has been created
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        # Check if the leng of the data is 1 (=2)
+        # Check if the leng of the data is 1
         self.assertEqual(len(res.data), 1)
         # Check if the name of the tag in the res response is the user tag
         self.assertEqual(res.data[0]['name'], tag.name)
