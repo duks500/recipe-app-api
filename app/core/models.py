@@ -2,6 +2,7 @@ from django.db import models
 # what we need to extand the user base model
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
+from django.conf import settings
 
 
 # extends the BaseUserManager
@@ -44,3 +45,19 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # make the default username to be email insead of name
     USERNAME_FIELD = 'email'
+
+
+class Tag(models.Model):
+    """Tag to be used for a recipe"""
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        # The model for the foreignKey
+        settings.AUTH_USER_MODEL,
+        # on_delete= What to do after deleting the user
+        # In this case, delete the tag
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        # return the string representation
+        return self.name

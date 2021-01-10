@@ -42,5 +42,7 @@ class UserAdmin(BaseUserAdmin):
     )
 
 
-# Register our useradamin to the model
+# Register our useradamin to the admin
 admin.site.register(models.User, UserAdmin)
+# Register the Tag model to the admin (no need for a speacil Useradmin)
+admin.site.register(models.Tag)
