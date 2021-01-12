@@ -1,8 +1,21 @@
+import uuid
+import os
 from django.db import models
 # what we need to extand the user base model
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
 from django.conf import settings
+
+
+def recipe_image_file_path(instance, filename):
+    """Generate file path for new recipe image"""
+    # Return the extention of the file name
+    ext = filename.split('.')[-1]
+    # Create a new name using the uuid
+    filename = f'{uuid.uuid4()}.{ext}'
+
+    # A relable method that allowed us to join 2 strings into a vaild path
+    return os.path.join('uploads/recipe/', filename)
 
 
 # extends the BaseUserManager
@@ -91,6 +104,7 @@ class Recipe(models.Model):
     # ManyToManyField = we could have many tags for example for one recipe
     ingredients = models.ManyToManyField('Ingredient')
     tags = models.ManyToManyField('Tag')
+    image = models.ImageField(null=True, upload_to=recipe_image_file_path)
 
     def __str__(self):
         return self.title
